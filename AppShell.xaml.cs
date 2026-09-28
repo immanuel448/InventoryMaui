@@ -1,10 +1,13 @@
-﻿namespace InventoryMaui
+﻿using InventoryMaui.Views;
+
+namespace InventoryMaui;
+
+public partial class AppShell : Shell
 {
-    public partial class AppShell : Shell
+    public AppShell()
     {
-        public AppShell()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+
+        Routing.RegisterRoute(nameof(ProductCreatePage), typeof(ProductCreatePage));
     }
 }
