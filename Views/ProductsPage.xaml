@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    x:Class="InventoryMaui.Views.ProductsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Productos">
+
+    <Grid Padding="20">
+
+        <ActivityIndicator
+            IsRunning="{Binding IsBusy}"
+            IsVisible="{Binding IsBusy}"
+            HorizontalOptions="Center"
+            VerticalOptions="Center" />
+
+        <CollectionView
+            ItemsSource="{Binding Products}"
+            IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <VerticalStackLayout Padding="0,10">
+
+                        <Label
+                            Text="{Binding Name}"
+                            FontSize="18"
+                            FontAttributes="Bold" />
+
+                        <Label
+                            Text="{Binding Description}"
+                            FontSize="14" />
+
+                        <Label
+                            Text="{Binding Price, StringFormat='Precio: {0:C}'}"
+                            FontSize="14" />
+
+                        <Label
+                            Text="{Binding Stock, StringFormat='Stock: {0}'}"
+                            FontSize="14" />
+
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+    </Grid>
+
+</ContentPage>
