@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    x:Class="InventoryMaui.Views.ProductCreatePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Nuevo producto">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="12">
+
+            <Label
+                Text="Nuevo producto"
+                FontSize="24"
+                FontAttributes="Bold" />
+
+            <Entry
+                Placeholder="Nombre"
+                Text="{Binding Name}" />
+
+            <Editor
+                Placeholder="Descripción"
+                Text="{Binding Description}"
+                HeightRequest="100" />
+
+            <Entry
+                Placeholder="Precio"
+                Text="{Binding Price}"
+                Keyboard="Numeric" />
+
+            <Entry
+                Placeholder="Stock"
+                Text="{Binding Stock}"
+                Keyboard="Numeric" />
+
+            <Button
+                Text="Guardar"
+                Command="{Binding CreateProductCommand}" />
+
+            <ActivityIndicator
+                IsRunning="{Binding IsBusy}"
+                IsVisible="{Binding IsBusy}"
+                HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
