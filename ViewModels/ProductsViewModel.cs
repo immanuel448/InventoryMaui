@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using InventoryMaui.Models;
 using InventoryMaui.Services;
+using InventoryMaui.Views;
 using System.Collections.ObjectModel;
 
 namespace InventoryMaui.ViewModels;
@@ -61,5 +62,11 @@ public partial class ProductsViewModel : ObservableObject
     private async Task LoadProducts()
     {
         await LoadProductsAsync();
+    }
+
+    [RelayCommand]
+    private async Task GoToCreate()
+    {
+        await Shell.Current.GoToAsync(nameof(ProductCreatePage));
     }
 }

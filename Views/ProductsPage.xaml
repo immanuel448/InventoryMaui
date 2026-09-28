@@ -16,14 +16,23 @@
 
         <!--aquí estamos metiendo Button y CollectionView dentro de un VerticalStackLayout para que queden uno debajo del otro.-->
         <VerticalStackLayout>
-            
-        <Button
-            Text="Actualizar"
-            Command="{Binding LoadProductsCommand}"
-            HorizontalOptions="End"
-            Margin="0,0,0,10" />
 
-        <CollectionView
+            <HorizontalStackLayout
+                HorizontalOptions="End"
+                Spacing="10"
+                Margin="0,0,0,10">
+
+                        <Button
+                Text="Nuevo producto"
+                Command="{Binding GoToCreateCommand}" />
+
+                        <Button
+                Text="Actualizar"
+                Command="{Binding LoadProductsCommand}" />
+
+            </HorizontalStackLayout>
+
+            <CollectionView
             ItemsSource="{Binding Products}">
 
             <CollectionView.ItemTemplate>
