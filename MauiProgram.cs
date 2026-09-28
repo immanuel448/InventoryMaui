@@ -1,5 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
-using InventoryMaui.Services;
+﻿using InventoryMaui.Services;
+using InventoryMaui.ViewModels;
+using Microsoft.Extensions.Logging;
 
 namespace InventoryMaui
 {
@@ -20,6 +21,8 @@ namespace InventoryMaui
             {
                 client.BaseAddress = new Uri("https://localhost:7242/");
             });
+
+            builder.Services.AddTransient<ProductsViewModel>();
 
 #if DEBUG
             builder.Logging.AddDebug();
