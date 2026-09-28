@@ -29,6 +29,7 @@ namespace InventoryMaui
             });
 
             builder.Services.AddTransient<ProductsViewModel>();
+            builder.Services.AddTransient<ProductCreateViewModel>();
 
 #if DEBUG
             builder.Logging.AddDebug();
