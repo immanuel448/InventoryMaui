@@ -17,9 +17,15 @@ namespace InventoryMaui
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            //En esta aplicación de desarrollo, acepta el certificado HTTPS de nuestra API aunque sea un certificado de desarrollo
             builder.Services.AddHttpClient<ProductApiService>(client =>
             {
                 client.BaseAddress = new Uri("https://localhost:7242/");
+            })
+            .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback =
+                    HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
             });
 
             builder.Services.AddTransient<ProductsViewModel>();

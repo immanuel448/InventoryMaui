@@ -15,8 +15,7 @@
             VerticalOptions="Center" />
 
         <CollectionView
-            ItemsSource="{Binding Products}"
-            IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}">
+            ItemsSource="{Binding Products}">
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
