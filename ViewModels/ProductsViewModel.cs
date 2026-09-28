@@ -32,10 +32,23 @@ public partial class ProductsViewModel : ObservableObject
         {
             IsBusy = true;
 
-            //es quien realmente hace la petición HTTP.
             var products = await _productApiService.GetProductsAsync();
 
             Products = new ObservableCollection<ProductDto>(products);
+        }
+        catch (HttpRequestException)//para manejar errores de conexión con el servidor
+        {
+            await Shell.Current.DisplayAlert(
+                "Error",
+                "No fue posible conectarse con el servidor.",
+                "Aceptar");
+        }
+        catch (Exception)
+        {
+            await Shell.Current.DisplayAlert(
+                "Error",
+                "Ocurrió un error al cargar los productos.",
+                "Aceptar");
         }
         finally
         {
