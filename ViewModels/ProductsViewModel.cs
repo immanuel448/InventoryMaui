@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using InventoryMaui.Models;
 using InventoryMaui.Services;
 using System.Collections.ObjectModel;
@@ -54,5 +55,11 @@ public partial class ProductsViewModel : ObservableObject
         {
             IsBusy = false;
         }
+    }
+
+    [RelayCommand]
+    private async Task LoadProducts()
+    {
+        await LoadProductsAsync();
     }
 }
