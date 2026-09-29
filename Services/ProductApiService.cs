@@ -19,6 +19,16 @@ public class ProductApiService
                ?? new List<ProductDto>();
     }
 
+    public async Task<ProductDto?> GetProductByIdAsync(int id)
+    {
+        var response = await _httpClient.GetAsync($"api/products/{id}");
+
+        if (!response.IsSuccessStatusCode)//si no encuentra nada
+            return null;
+
+        return await response.Content.ReadFromJsonAsync<ProductDto>();
+    }
+
     public async Task<ProductDto?> CreateProductAsync(ProductDto product)
     {
         //PostAsJsonAsync() envía el producto a POST /api/products.
