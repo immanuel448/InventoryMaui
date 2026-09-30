@@ -64,4 +64,93 @@ public partial class ProductEditViewModel : ObservableObject
             IsBusy = false; // Libera el estado ocupado
         }
     }
+
+    [RelayCommand]
+    private async Task UpdateProduct()
+    {
+        if (IsBusy)
+            return;
+
+        if (string.IsNullOrWhiteSpace(Name))
+        {
+            await Shell.Current.DisplayAlert(
+                "Validación",
+                "El nombre del producto es obligatorio.",
+                "Aceptar");
+
+            return;
+        }
+
+        if (Price < 0)
+        {
+            await Shell.Current.DisplayAlert(
+                "Validación",
+                "El precio no puede ser negativo.",
+                "Aceptar");
+
+            return;
+        }
+
+        if (Stock < 0)
+        {
+            await Shell.Current.DisplayAlert(
+                "Validación",
+                "El stock no puede ser negativo.",
+                "Aceptar");
+
+            return;
+        }
+
+        try
+        {
+            IsBusy = true;
+
+            var product = new ProductDto
+            {
+                Id = Id,
+                Name = Name.Trim(),
+                Description = Description.Trim(),
+                Price = Price,
+                Stock = Stock,
+                IsActive = true
+            };
+
+            var result = await _productApiService.UpdateProductAsync(Id, product);
+
+            if (result == null)
+            {
+                await Shell.Current.DisplayAlert(
+                    "Error",
+                    "No fue posible actualizar el producto.",
+                    "Aceptar");
+
+                return;
+            }
+
+            await Shell.Current.DisplayAlert(
+                "Éxito",
+                "Producto actualizado correctamente.",
+                "Aceptar");
+
+            await Shell.Current.GoToAsync("..");
+        }
+        catch (HttpRequestException)
+        {
+            await Shell.Current.DisplayAlert(
+                "Error",
+                "No fue posible conectarse con el servidor.",
+                "Aceptar");
+        }
+        catch (Exception)
+        {
+            await Shell.Current.DisplayAlert(
+                "Error",
+                "Ocurrió un error al actualizar el producto.",
+                "Aceptar");
+        }
+        finally
+        {
+            IsBusy = false;
+        }
+    }
 }
