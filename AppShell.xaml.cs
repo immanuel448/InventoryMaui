@@ -8,6 +8,8 @@ public partial class AppShell : Shell
     {
         InitializeComponent();
 
+        // registra las rutas para navegar entre páginas
         Routing.RegisterRoute(nameof(ProductCreatePage), typeof(ProductCreatePage));
+        Routing.RegisterRoute(nameof(ProductEditPage), typeof(ProductEditPage));
     }
 }

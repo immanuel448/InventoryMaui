@@ -28,8 +28,10 @@ namespace InventoryMaui
                     HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
             });
 
+            //DI
             builder.Services.AddTransient<ProductsViewModel>();
             builder.Services.AddTransient<ProductCreateViewModel>();
+            builder.Services.AddTransient<ProductEditViewModel>();
 
 #if DEBUG
             builder.Logging.AddDebug();
