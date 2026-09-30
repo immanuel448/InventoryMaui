@@ -6,63 +6,80 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="Productos">
 
-    <Grid Padding="20">
+    <!-- Grid principal con dos filas:
+         - Fila 0: botones de acciones
+         - Fila 1: lista de productos -->
+    <Grid
+        Padding="20"
+        RowDefinitions="Auto,*">
 
-        <ActivityIndicator
-            IsRunning="{Binding IsBusy}"
-            IsVisible="{Binding IsBusy}"
-            HorizontalOptions="Center"
-            VerticalOptions="Center" />
+        <!-- Botones de acción en la parte superior -->
+        <HorizontalStackLayout
+            Grid.Row="0"
+            HorizontalOptions="End"
+            Spacing="10"
+            Margin="0,0,0,10">
 
-        <!--aquí estamos metiendo Button y CollectionView dentro de un VerticalStackLayout para que queden uno debajo del otro.-->
-        <VerticalStackLayout>
-
-            <HorizontalStackLayout
-                HorizontalOptions="End"
-                Spacing="10"
-                Margin="0,0,0,10">
-
-                        <Button
+            <Button
                 Text="Nuevo producto"
                 Command="{Binding GoToCreateCommand}" />
 
-                        <Button
+            <Button
                 Text="Actualizar"
                 Command="{Binding LoadProductsCommand}" />
 
-            </HorizontalStackLayout>
+        </HorizontalStackLayout>
 
-            <CollectionView
+        <!-- Lista de productos en la segunda fila -->
+        <CollectionView
+            Grid.Row="1"
             ItemsSource="{Binding Products}">
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <VerticalStackLayout Padding="0,10">
 
+                        <!-- Nombre destacado -->
                         <Label
                             Text="{Binding Name}"
                             FontSize="18"
                             FontAttributes="Bold" />
 
+                        <!-- Descripción -->
                         <Label
                             Text="{Binding Description}"
                             FontSize="14" />
 
+                        <!-- Precio con formato moneda -->
                         <Label
                             Text="{Binding Price, StringFormat='Precio: {0:C}'}"
                             FontSize="14" />
 
+                        <!-- Stock con formato -->
                         <Label
                             Text="{Binding Stock, StringFormat='Stock: {0}'}"
                             FontSize="14" />
+
+                        <!-- Botón Editar: pasa el Id al comando del ViewModel -->
+                        <Button
+                            Text="Editar"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EditProductCommand}"
+                            CommandParameter="{Binding Id}" />
 
                     </VerticalStackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
 
         </CollectionView>
-            
-        </VerticalStackLayout>
+
+        <!-- Spinner de carga, ocupa ambas filas -->
+        <ActivityIndicator
+            Grid.RowSpan="2"
+            IsRunning="{Binding IsBusy}"
+            IsVisible="{Binding IsBusy}"
+            HorizontalOptions="Center"
+            VerticalOptions="Center" />
+
     </Grid>
 
 </ContentPage>

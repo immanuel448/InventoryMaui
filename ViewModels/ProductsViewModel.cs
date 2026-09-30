@@ -69,4 +69,11 @@ public partial class ProductsViewModel : ObservableObject
     {
         await Shell.Current.GoToAsync(nameof(ProductCreatePage));
     }
+
+    [RelayCommand]
+    private async Task EditProduct(int productId)
+    {
+        await Shell.Current.GoToAsync(
+            $"{nameof(ProductEditPage)}?id={productId}");
+    }
 }
