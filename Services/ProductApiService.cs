@@ -44,6 +44,13 @@ public class ProductApiService
         return await response.Content.ReadFromJsonAsync<ProductDto>();
     }
 
+    public async Task<bool> DeleteProductAsync(int id)
+    {
+        var response = await _httpClient.DeleteAsync($"api/products/{id}");
+
+        return response.IsSuccessStatusCode;
+    }
+
     public async Task<ProductDto?> CreateProductAsync(ProductDto product)
     {
         //PostAsJsonAsync() envía el producto a POST /api/products.
