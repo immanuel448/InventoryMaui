@@ -66,6 +66,12 @@
                             Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EditProductCommand}"
                             CommandParameter="{Binding Id}" />
 
+                        <!--botón Eliminar-->
+                        <Button
+                            Text="Eliminar"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteProductCommand}"
+                            CommandParameter="{Binding Id}" />
+
                     </VerticalStackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
