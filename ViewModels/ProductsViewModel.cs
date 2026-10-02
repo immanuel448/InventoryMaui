@@ -77,7 +77,12 @@ public partial class ProductsViewModel : ObservableObject
             }
 
             await Shell.Current.DisplayAlert("Éxito", "Producto eliminado correctamente.", "Aceptar");
-            await LoadProductsAsync(); // Recarga lista después de eliminar
+            var product = Products.FirstOrDefault(p => p.Id == productId);
+
+            if (product != null)
+            {
+                Products.Remove(product);
+            } // Recarga lista después de eliminar
         }
         catch (HttpRequestException)
         {
